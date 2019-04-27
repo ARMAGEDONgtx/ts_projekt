@@ -8,7 +8,7 @@ tree = ET.parse('TS_projxml.xml')
 automata = tree.getroot()
 
 #sciezka do plant'a diagnostic z pliku xml
-diagnostic = automata[9]
+diagnostic = automata[6]
 
 #wczytanie stanow z xml'a do formatu biblioteki od automatu
 [diag_states, diag_state_dict] = functions.create_states(diagnostic)
