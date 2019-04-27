@@ -233,10 +233,8 @@ while user_input != None:
 
     #znajdz klucz w slowniku od danego eventu
     ev = functions.find_event_by_name(opt[out], event_dicts)
-    print(ev)
     #dodajemy do ciagu odpowiedni sygnal na podstawie wyboru uzytkownika
     event_strings = functions.aggregate_input_strings(event_strings, ev)
-    print(event_strings)
     #wprowadzamy do automatu nasz ciag
     curr_states = functions.process_automatas(automatas,event_strings)   
  

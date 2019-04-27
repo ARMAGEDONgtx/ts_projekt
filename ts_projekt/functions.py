@@ -31,8 +31,6 @@ def create_transitions(automata):
         else:
             temp_dict[child.attrib['event']] = child.attrib['dest']
             transitions[child.attrib['source']] = temp_dict
-
-    pp.pprint(transitions)
     return transitions
 
 #preparuje tranzycje z supremicy tak zeby nadawalo sie do bilitoeki automata
@@ -50,8 +48,6 @@ def prepare_transitions(automata, events):
                 temp_dict[ev] = child.attrib['source']
             temp_dict[child.attrib['event']] = child.attrib['dest']
             transitions[child.attrib['source']] = temp_dict
-
-    pp.pprint(transitions)
     return transitions
 
 #opcja dla jednego plantu
@@ -75,16 +71,16 @@ def show_avaiable_events2(current_state, transitions, events_dict):
     while index < len(current_state):
         all_options = all_options + show_avaiable_events(current_state[index], transitions[index], events_dict[index])
         index = index + 1
-        
+    #usunie duplikaty   
     out = list(dict.fromkeys(all_options))
     print('Mozliwe sygnaly do wporwadzenia:')
     licznik = 0 
     for ev in out:
         print(str(licznik) + " - " + ev)
-        licznik = licznik + 1
-    #usunie duplikaty
+        licznik = licznik + 1 
     return out
 
+#odnalezenie klucza po wartosci, czyli po nazwie eventu znajdziemy index
 def find_event_by_name(event,event_dicts):
     out_list = list()
     for dict in event_dicts:
@@ -96,7 +92,7 @@ def find_event_by_name(event,event_dicts):
         out_list.append(k)
     return out_list
 
-
+#kumulowanie odczytywanych wejsc, potrzebujemy to ze wzgledu na dzialanie biblioteki (nie zapamietuje stanu)
 def aggregate_input_strings(strings, to_be_added):
     out = strings
     index = 0
@@ -106,6 +102,7 @@ def aggregate_input_strings(strings, to_be_added):
         index = index + 1
     return out
 
+#przetwazanie automatow na podstawie ciagow wejsc
 def process_automatas(automatas, event_strings):
     index = 0
     out_states = list()
@@ -114,7 +111,7 @@ def process_automatas(automatas, event_strings):
             index = index + 1
     return out_states
 
-
+#odczytywanie wyboru uzytkownika
 def user_input():
     choice = input('wybierz, ktoras z powyzszych opcji, aby wyjsc wpisz x: ')
     choice_int = None
