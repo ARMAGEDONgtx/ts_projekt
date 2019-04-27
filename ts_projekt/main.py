@@ -8,7 +8,7 @@ tree = ET.parse('TS_projxml.xml')
 automata = tree.getroot()
 
 #sciezka do plant'a diagnostic z pliku xml
-diagnostic = automata[6]
+diagnostic = automata[5]
 
 #wczytanie stanow z xml'a do formatu biblioteki od automatu
 [diag_states, diag_state_dict] = functions.create_states(diagnostic)
@@ -26,18 +26,20 @@ dfa = DFA(
     states=set(diag_states),
     input_symbols=set(diag_events),
     transitions=diag_transitions,
-    initial_state='0',
+    initial_state='4',
     final_states=set(diag_states)
 )
 
 #aktualny stan 
-curr_state = '0'
+curr_state = '4'
 #ciag wejsc - czyli to co pokolei wpisujemy(eventy)
 event_string = ''
 
 user_input = 'o'
 while user_input != None:
     print('########################################')
+    #wyswietlamy obecny stan
+    print("obecny stan - " + diag_state_dict[curr_state])
     #wystwietl mozliwe sygnaly
     opt = functions.show_avaiable_events(curr_state, real_diag_transitions, diag_event_dict)
     #uzytkownik wybiera sygna;
@@ -49,7 +51,6 @@ while user_input != None:
     #print(event_string)
     #wprowadzamy do automatu nasz ciag
     curr_state = dfa.read_input(event_string)    
-    #wyswietlamy obecny stan
-    print("obecny stan - " + diag_state_dict[curr_state])
+    
 
 
