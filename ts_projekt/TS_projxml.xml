@@ -50,32 +50,31 @@
 		<Event id="6" label="zamkniecie_DRZWI"/>
 	</Events>
 	<States>
-		<State id="0" name="S0"/>
-		<State id="1" name="error"/>
-		<State id="2" name="timer_ODLICZA" accepting="true"/>
-		<State id="3" name="timer_PAUZA_drzwi" accepting="true"/>
-		<State id="4" name="timer_PAUZA_stop" accepting="true"/>
-		<State id="5" name="timer_WYLACZONY" accepting="true"/>
-		<State id="6" name="timer_init" initial="true"/>
+		<State id="0" name="error"/>
+		<State id="1" name="timer_ODLICZA" accepting="true"/>
+		<State id="2" name="timer_PAUZA_drzwi" accepting="true"/>
+		<State id="3" name="timer_PAUZA_stop" accepting="true"/>
+		<State id="4" name="timer_WYLACZONY" accepting="true"/>
+		<State id="5" name="timer_init" initial="true"/>
 	</States>
 	<Transitions>
-		<Transition source="1" dest="5" event="0"/>
-		<Transition source="2" dest="3" event="3"/>
+		<Transition source="0" dest="4" event="0"/>
+		<Transition source="1" dest="2" event="3"/>
+		<Transition source="1" dest="3" event="1"/>
+		<Transition source="1" dest="4" event="5"/>
+		<Transition source="1" dest="0" event="2"/>
+		<Transition source="2" dest="1" event="6"/>
+		<Transition source="2" dest="0" event="2"/>
 		<Transition source="2" dest="4" event="1"/>
-		<Transition source="2" dest="5" event="5"/>
-		<Transition source="2" dest="1" event="2"/>
-		<Transition source="3" dest="2" event="6"/>
-		<Transition source="3" dest="1" event="2"/>
-		<Transition source="3" dest="5" event="1"/>
-		<Transition source="4" dest="2" event="0"/>
-		<Transition source="4" dest="5" event="1"/>
-		<Transition source="4" dest="5" event="6"/>
-		<Transition source="4" dest="1" event="2"/>
-		<Transition source="5" dest="2" event="0"/>
-		<Transition source="5" dest="1" event="2"/>
-		<Transition source="5" dest="5" event="6"/>
-		<Transition source="5" dest="5" event="3"/>
-		<Transition source="6" dest="5" event="4"/>
+		<Transition source="3" dest="1" event="0"/>
+		<Transition source="3" dest="4" event="1"/>
+		<Transition source="3" dest="4" event="6"/>
+		<Transition source="3" dest="0" event="2"/>
+		<Transition source="4" dest="1" event="0"/>
+		<Transition source="4" dest="0" event="2"/>
+		<Transition source="4" dest="4" event="6"/>
+		<Transition source="4" dest="4" event="3"/>
+		<Transition source="5" dest="4" event="4"/>
 	</Transitions>
 </Automaton>
 <Automaton name="dzrzwiczki" type="Plant">

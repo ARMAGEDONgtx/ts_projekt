@@ -54,18 +54,66 @@ def prepare_transitions(automata, events):
     pp.pprint(transitions)
     return transitions
 
+#opcja dla jednego plantu
 def show_avaiable_events(current_state, transitions, events_dict):
     licznik = 0
     options = list()
     options_to_print = list()
-    print('Mozliwe sygnaly do wporwadzenia:')
+    #print('Mozliwe sygnaly do wporwadzenia:')
     for ev in transitions[current_state]:
         options.append(ev)
-        #options_to_print.append(events_dict[ev])
-        print(str(licznik) + " - " + events_dict[ev])
+        options_to_print.append(events_dict[ev])
+        #print(str(licznik) + " - " + events_dict[ev])
         licznik= licznik + 1
     #print(options)
-    return options
+    return options_to_print
+
+#opcja dla wielu plantow
+def show_avaiable_events2(current_state, transitions, events_dict):
+    index = 0
+    all_options = list()
+    while index < len(current_state):
+        all_options = all_options + show_avaiable_events(current_state[index], transitions[index], events_dict[index])
+        index = index + 1
+        
+    out = list(dict.fromkeys(all_options))
+    print('Mozliwe sygnaly do wporwadzenia:')
+    licznik = 0 
+    for ev in out:
+        print(str(licznik) + " - " + ev)
+        licznik = licznik + 1
+    #usunie duplikaty
+    return out
+
+def find_event_by_name(event,event_dicts):
+    out_list = list()
+    for dict in event_dicts:
+        k = None
+        for key, value in dict.items():
+            if value == event:
+                k = key
+                break
+        out_list.append(k)
+    return out_list
+
+
+def aggregate_input_strings(strings, to_be_added):
+    out = strings
+    index = 0
+    for st in out:
+        if to_be_added[index] is not None:
+            out[index] = out[index] + to_be_added[index]
+        index = index + 1
+    return out
+
+def process_automatas(automatas, event_strings):
+    index = 0
+    out_states = list()
+    for a in automatas:
+            out_states.append(a.read_input(event_strings[index]))
+            index = index + 1
+    return out_states
+
 
 def user_input():
     choice = input('wybierz, ktoras z powyzszych opcji, aby wyjsc wpisz x: ')
