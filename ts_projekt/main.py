@@ -226,6 +226,12 @@ while user_input != None:
     print("obecny stan Ustawień- " + settings_state_dict[curr_states[5]])
     #wystwietl mozliwe sygnaly
     opt = functions.show_avaiable_events2(curr_states, real_transitions, event_dicts)
+    print("przed guardem")
+    print(opt)
+    functions.guards(door_state_dict[curr_states[3]], opt)
+    print("po guardzie")
+    print(opt)
+    functions.print_events(opt)
     #uzytkownik wybiera sygnal
     out = functions.user_input()
     if out is None:

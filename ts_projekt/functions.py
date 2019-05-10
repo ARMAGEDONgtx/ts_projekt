@@ -72,13 +72,23 @@ def show_avaiable_events2(current_state, transitions, events_dict):
         all_options = all_options + show_avaiable_events(current_state[index], transitions[index], events_dict[index])
         index = index + 1
     #usunie duplikaty   
-    out = list(dict.fromkeys(all_options))
+    out = list(dict.fromkeys(all_options))  
+    return out
+
+#tylko do printowania
+def print_events(events):
     print('Mozliwe sygnaly do wporwadzenia:')
     licznik = 0 
-    for ev in out:
+    for ev in events:
         print(str(licznik) + " - " + ev)
         licznik = licznik + 1 
-    return out
+
+#przykladowy guard
+def guards(current_state, event):
+    if(current_state == 'otwarte_drzwi'):
+        if 'button_start' in event:
+            event.remove('button_start')
+    
 
 #odnalezenie klucza po wartosci, czyli po nazwie eventu znajdziemy index
 def find_event_by_name(event,event_dicts):
